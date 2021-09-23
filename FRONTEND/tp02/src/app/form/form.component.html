@@ -1,0 +1,4 @@
+<p><label>Nom</label><input [(ngModel)] = "lastname"/></p> 
+{{lastname}}
+<button class="btn-submit" [disabled]="!valid" (click)="onSubmit()">Envoyer</button>
+<app-address [lastname] = "lastname"></app-address>
