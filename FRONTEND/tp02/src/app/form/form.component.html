@@ -1,4 +1,91 @@
-<p><label>Nom</label><input [(ngModel)] = "lastname"/></p> 
-{{lastname}}
-<button class="btn-submit" [disabled]="!valid" (click)="onSubmit()">Envoyer</button>
-<app-address [lastname] = "lastname"></app-address>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<div *ngIf="validated == false">
+    <div class="form-row" id="names">
+        <div class="form-group col">
+            <label for="gender">Civilité</label>
+            <select class="form-control" [(ngModel)]="gender">
+                <option>Madame</option>
+                <option>Monsieur</option>
+            </select>
+        </div>
+        <div class="form-group col">
+            <label for="firstName">Prénom</label>
+            <input type="text" class="form-control" [(ngModel)]="firstName" placeholder="Entrez votre prénom">
+        </div>
+        <div class="form-group col">
+            <label for="lastName">Nom</label>
+            <input type="text" class="form-control" [(ngModel)] = "lastName" placeholder="Entrez votre nom">
+        </div>
+    </div>
+    
+    <div class="form-row" id="personalAddress">
+        <div class="form-group col-md-4">
+            <label for="address">Adresse</label>
+            <input type="text" class="form-control" [(ngModel)]="address" placeholder="Entrez votre adresse">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="city">Ville</label>
+            <input type="text" class="form-control" [(ngModel)]="city" placeholder="Entrez votre ville">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="zip">Code postal</label>
+            <input type="text" class="form-control" [(ngModel)]="zip" placeholder="Entrez votre code postal">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="country">Pays</label>
+            <input type="text" class="form-control" [(ngModel)]="country" placeholder="Entrez votre pays">
+        </div>
+    </div>
+    
+    <div class="form-row" id="contact">
+        <div class="form-group col">
+            <label for="tel">Téléphone</label>
+            <input type="tel" class="form-control" [(ngModel)]="tel" placeholder="Entrez votre téléphone">
+        </div>
+        <div class="form-group col">
+            <label for="email">E-Mail</label>
+            <input type="email" class="form-control" [(ngModel)]="email" placeholder="Entrez votre E-Mail">
+            <div *ngIf="!email" >Merci de saisir une adresse email correcte.</div>
+        </div>
+        
+    </div>
+    
+    
+    <div class="form-group">
+        <label for="id">Identifiant</label>
+        <input type="text" class="form-control" [(ngModel)]="login" placeholder="Entrez votre identifiant" required>
+        <div *ngIf="!login" >Merci de saisir un identifiant disponible.</div>
+    </div>
+    <div class="form-group">
+        <label for="pass">Mot de passe</label>
+        <input type="password" class="form-control" [(ngModel)]="password" placeholder="Entrez votre mot de passe" required>
+        <div *ngIf="!password">Merci de saisir un mot de passe valide.</div>
+    </div>
+    
+</div>
+<app-recap *ngIf="validated == true"
+            [lastName]="lastName"
+            [firstName]="firstName"
+            [address] ="address"
+            [zip] = "zip"
+            [city] = "city"
+            [tel] = "tel"
+            [email]= "email"
+            [gender] = "gender"
+            [password] = "password"
+            [login] = "login"
+            [country] ="country"></app-recap>
+
+
+
+<button class="btn-submit"  (click)="onSubmit()">Envoyer</button>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+

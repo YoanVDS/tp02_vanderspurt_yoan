@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
-  @Input() lastname: string = "";
+  @Input() lastName: string = "";
   constructor() { }
 
   ngOnInit(): void {
