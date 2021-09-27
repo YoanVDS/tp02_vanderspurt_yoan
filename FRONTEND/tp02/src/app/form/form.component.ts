@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { pipe } from 'rxjs';
+import { PhonePipe } from '../phone.pipe';
 
 @Component({
   selector: 'app-form',
@@ -21,32 +23,40 @@ export class FormComponent implements OnInit {
   login: string = "";
   country: string = "";
   validated: boolean = false;
+  validEmail: boolean = false;
+  validPassword: boolean = false;
+  validPhone: boolean = false;
+  errorPassword: string = "Merci de saisir un mot de passe";
 
-  onSubmit () {
+  validateEmail(){
+    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    this.validEmail = regexp.test(this.email);
+  }
+
+  validatePassword(){
+    this.validPassword = false;
     var regexLength = new RegExp("(?=.{8,})");
     var regexMinMaj = new RegExp("^(?=.*[a-z])(?=.*[A-Z])");
     var regexNumber = new RegExp("(?=.*[0-9])");
     if(!regexLength.test(this.password)){
-      alert("Merci de saisir un mot de passe de plus de 8 caractères.");
+      this.errorPassword = "Merci de saisir un mot de passe de plus de 8 caractères.";
       return;
     }   
     if(!regexMinMaj.test(this.password)){
-        alert("Merci de saisir un mot de passe contenant au moins une minuscule et une majuscule");
+        this.errorPassword ="Merci de saisir un mot de passe contenant au moins une minuscule et une majuscule";
         return;
     }     
     if(!regexNumber.test(this.password)){
-        alert("Merci de saisir un mot de passe contenant au moins un chiffre");
+        this.errorPassword = "Merci de saisir un mot de passe contenant au moins un chiffre";
         return;
     }
-    if(!this.login){
-      alert("Merci de saisir un identifiant");
-      return;
-    }
-    if(!this.email){
-      alert("Merci de saisir un mail correct");
-      return;
-    }
+    this.validPassword = true;
+  }
 
+  validatePhone(){
+    this.validPhone = this.tel.length == 10;
+  }
+  onSubmit () {
     this.validated = true;
     }
 

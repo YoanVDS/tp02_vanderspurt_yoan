@@ -37,19 +37,27 @@
         </div>
         <div class="form-group col-md-2">
             <label for="country">Pays</label>
-            <input type="text" class="form-control" [(ngModel)]="country" placeholder="Entrez votre pays">
+            <select class="form-control" [(ngModel)]="country">
+                <option>France</option>
+                <option>Royaume-Uni</option>
+                <option>Etats-Unis</option>
+                <option>Allemagne</option>
+            </select>
+            <div *ngIf="!country" class="alert-div" >Merci de saisir un pays.</div>
         </div>
+        
     </div>
     
     <div class="form-row" id="contact">
         <div class="form-group col">
             <label for="tel">Téléphone</label>
-            <input type="tel" class="form-control" [(ngModel)]="tel" placeholder="Entrez votre téléphone">
+            <input (change)="validatePhone()" type="tel" class="form-control" [(ngModel)]="tel" placeholder="Entrez votre téléphone sous la forme 0123456789">
+            <div *ngIf="!validPhone" class="alert-div" >Merci de saisir un numéro de téléphone sous le bon format.</div>
         </div>
         <div class="form-group col">
             <label for="email">E-Mail</label>
-            <input type="email" class="form-control" [(ngModel)]="email" placeholder="Entrez votre E-Mail">
-            <div *ngIf="!email" >Merci de saisir une adresse email correcte.</div>
+            <input (change)="validateEmail()" type="email" class="form-control" [(ngModel)]="email"  placeholder="Entrez votre E-Mail">
+            <div *ngIf="!validEmail" class="alert-div" >Merci de saisir une adresse email correcte.</div>
         </div>
         
     </div>
@@ -58,12 +66,12 @@
     <div class="form-group">
         <label for="id">Identifiant</label>
         <input type="text" class="form-control" [(ngModel)]="login" placeholder="Entrez votre identifiant" required>
-        <div *ngIf="!login" >Merci de saisir un identifiant disponible.</div>
+        <div *ngIf="!login" class="alert-div" >Merci de saisir un identifiant disponible.</div>
     </div>
     <div class="form-group">
         <label for="pass">Mot de passe</label>
-        <input type="password" class="form-control" [(ngModel)]="password" placeholder="Entrez votre mot de passe" required>
-        <div *ngIf="!password">Merci de saisir un mot de passe valide.</div>
+        <input (change)="validatePassword()" type="password" class="form-control" [(ngModel)]="password" placeholder="Entrez votre mot de passe" required>
+        <div *ngIf="!validPassword" class="alert-div">{{errorPassword}}</div>
     </div>
     
 </div>
@@ -82,7 +90,13 @@
 
 
 
-<button class="btn-submit"  (click)="onSubmit()">Envoyer</button>
+<button class="btn-submit"  (click)="onSubmit()"
+        *ngIf="country 
+            && validPhone 
+            && validPassword
+            && validEmail
+            && login
+            && !validated">Envoyer</button>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
